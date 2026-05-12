@@ -1,8 +1,6 @@
 #include <iostream>
-#include <exception>
 using namespace std;
-
-class OutOfRangeException : public exception
+class OutOfRangeException
 {
 private:
     const char* message;
@@ -11,11 +9,13 @@ public:
     OutOfRangeException(const char* msg = "Error: Mark is out of valid range (0-100).") : message(msg)
     {
     }
-    const char* what() const throw() override
+
+    const char* what() const
     {
         return message;
     }
 };
+
 float calculateAverage(int m1, int m2, int m3, int m4)
 {
     int marks[4] = { m1, m2, m3, m4 };
@@ -47,10 +47,6 @@ int main()
     catch (const OutOfRangeException& e)
     {
         cerr << e.what() << endl;
-    }
-    catch (const exception& e)
-    {
-        cerr << "Standard exception: " << e.what() << endl;
     }
 
     return 0;
