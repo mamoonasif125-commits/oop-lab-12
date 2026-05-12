@@ -1,24 +1,11 @@
 #include <iostream>
 using namespace std;
-class divisionWithZeroException
-{
-private:
-    const char* message;
 
-public:
-    divisionWithZeroException(const char* msg = "Error: Division by zero is not allowed.") : message(msg)
-    {
-    }
-    const char* what() const
-    {
-        return message;
-    }
-};
 double calculate(double a, double b, double c)
 {
     if ((a - b) == 0)
     {
-        throw divisionWithZeroException();
+        throw "Error: Division by zero is not allowed.";
     }
     return (a + b + c) / (a - b);
 }
@@ -39,9 +26,9 @@ int main()
         double d = calculate(a, b, c);
         cout << "The result is: " << d << endl;
     }
-    catch (const divisionWithZeroException& e)
+    catch (const char* msg)
     {
-        cerr << e.what() << endl;
+        cerr << msg << endl;
     }
 
     return 0;
